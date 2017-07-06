@@ -53,3 +53,32 @@ func ReverseStyleC(chars []byte) (out []byte) {
 
 	return out
 }
+
+// 1.3
+
+// determine if two strings are permutations of
+// each other
+
+func ArePermutations(s, t string) bool {
+
+	deepEqual := func(m1, m2 map[rune]int) bool {
+		for k1, c1 := range m1 {
+			if c2, ok := m2[k1]; !ok {
+				return false
+			} else if c1 != c2 {
+				return false
+			}
+		}
+		return true
+	}
+
+	scoop := func(s string) map[rune]int {
+		m := make(map[rune]int)
+		for _, r := range s {
+			m[r]++
+		}
+		return m
+	}
+
+	return deepEqual(scoop(s), scoop(t))
+}

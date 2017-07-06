@@ -29,3 +29,12 @@ func Test12(t *testing.T) {
 		t.Fail()
 	}
 }
+
+func Test13(t *testing.T) {
+	if ArePermutations("Okay", "Sure") {
+		t.Fail()
+	}
+	if !ArePermutations("Yessir", "eYriss") {
+		t.Fail()
+	}
+}

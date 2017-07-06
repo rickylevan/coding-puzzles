@@ -38,3 +38,9 @@ func Test13(t *testing.T) {
 		t.Fail()
 	}
 }
+
+func Test14(t *testing.T) {
+	if SillyReplace("okay man") != "okay%20man" {
+		t.Fail()
+	}
+}

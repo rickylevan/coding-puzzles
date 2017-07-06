@@ -1,7 +1,5 @@
 package lib
 
-import "fmt"
-
 // 1.1
 
 // free solution
@@ -49,8 +47,6 @@ func ReverseStyleC(chars []byte) (out []byte) {
 	// put in a fresh null terminator
 	out = append(out, byte(0))
 
-	fmt.Println(out)
-
 	return out
 }
 
@@ -81,4 +77,21 @@ func ArePermutations(s, t string) bool {
 	}
 
 	return deepEqual(scoop(s), scoop(t))
+}
+
+// 1.4
+
+// replace all spaces with '%20'
+// ("true" len is hard to program)
+func SillyReplace(s string) string {
+	var out []rune
+	for _, c := range s {
+		if c == ' ' {
+			out = append(out, []rune("%20")...)
+		} else {
+			out = append(out, c)
+		}
+	}
+
+	return string(out)
 }

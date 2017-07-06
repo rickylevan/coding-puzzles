@@ -1,5 +1,7 @@
 package lib
 
+import "strconv"
+
 // 1.1
 
 // free solution
@@ -92,6 +94,41 @@ func SillyReplace(s string) string {
 			out = append(out, c)
 		}
 	}
+
+	return string(out)
+}
+
+// 1.5
+
+// compress like so: aaabcc -> a3b1c2
+// ignoring the return original string if smaller,
+// that's weird and inelegant
+
+func Compress(s string) string {
+	if len(s) == 0 {
+		return ""
+	}
+
+	serialize := func(cur rune, count int) []rune {
+		tmp := string(cur) + strconv.Itoa(count)
+		return []rune(tmp)
+	}
+
+	var out []rune
+
+	cur := rune(s[0])
+	count := 1
+	for _, c := range s[1:] {
+		if c == cur {
+			count++
+		} else {
+			out = append(out, serialize(cur, count)...)
+			count = 1
+		}
+		cur = c
+	}
+
+	out = append(out, serialize(cur, count)...)
 
 	return string(out)
 }

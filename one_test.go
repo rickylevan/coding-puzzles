@@ -44,3 +44,9 @@ func Test14(t *testing.T) {
 		t.Fail()
 	}
 }
+
+func Test15(t *testing.T) {
+	if Compress("aaabcc") != "a3b1c2" {
+		t.Error(Compress("aaabcc"))
+	}
+}

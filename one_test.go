@@ -66,3 +66,18 @@ func Test17(t *testing.T) {
 	}
 
 }
+
+func Test18Sub(t *testing.T) {
+	if !IsSubstring("overbearing", "bear") {
+		t.Fail()
+	}
+	if IsSubstring("overbearing", "fool") {
+		t.Fail()
+	}
+}
+
+func Test18Rot(t *testing.T) {
+	if !IsRotation("waterbottle", "erbottlewat") {
+		t.Fail()
+	}
+}

@@ -173,3 +173,22 @@ func ZeroCrosses(mat [][]int) {
 		}
 	}
 }
+
+// 1.8
+
+// first need to write an isSubstring method
+
+func IsSubstring(s, sub string) bool {
+	if len(sub) > len(s) {
+		return false
+	}
+	if s[:len(sub)] == sub {
+		return true
+	} else {
+		return IsSubstring(s[1:], sub)
+	}
+}
+
+func IsRotation(a, b string) bool {
+	return IsSubstring(a+a, b)
+}

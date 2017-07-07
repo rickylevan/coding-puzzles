@@ -43,7 +43,7 @@ func (rb *ringBuf) Push(val int) {
 }
 
 func (rb *ringBuf) Pop() int {
-	rb.cur = (rb.cur - 1) % len(rb.data)
+	rb.cur = (rb.cur + (len(rb.data) - 1)) % len(rb.data)
 	return rb.data[rb.cur]
 }
 
@@ -76,4 +76,27 @@ func RemoveDups(l *node) {
 		}
 		seen[cur] = struct{}{}
 	}
+}
+
+// 2.2
+
+// get the k-to-last element of a linked list
+// of course, in the cute way, not a cheap way
+func KthFromLast(l *node, k uint) int {
+	var rb ringBuf
+	rb.New(k)
+	// assuming k >= 1, len(l) >= k
+	for l.next != nil {
+		rb.Push(l.val)
+		l = l.next
+	}
+	// one final push once next is nil
+	rb.Push(l.val)
+
+	var out int
+	for i := 0; i < int(k); i++ {
+		out = rb.Pop()
+	}
+
+	return out
 }

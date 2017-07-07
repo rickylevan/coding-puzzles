@@ -34,3 +34,11 @@ func Test22RB(t *testing.T) {
 		t.Fail()
 	}
 }
+
+func Test22(t *testing.T) {
+	l := &node{1, &node{2, &node{3, &node{4, nil}}}}
+	var k uint = 2
+	if KthFromLast(l, k) != 3 {
+		t.Fail()
+	}
+}

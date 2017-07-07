@@ -42,3 +42,12 @@ func Test22(t *testing.T) {
 		t.Fail()
 	}
 }
+
+func Test23(t *testing.T) {
+	l := &node{1, &node{2, &node{3, &node{4, nil}}}}
+	s := &node{1, &node{2, &node{4, nil}}}
+	Snip(l.next.next)
+	if !reflect.DeepEqual(l, s) {
+		t.Fail()
+	}
+}

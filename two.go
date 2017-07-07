@@ -100,3 +100,10 @@ func KthFromLast(l *node, k uint) int {
 
 	return out
 }
+
+// 2.3
+
+// receive a middle node only and cut it out
+func Snip(mid *node) {
+	*mid = *mid.next
+}

@@ -2,6 +2,7 @@ package lib
 
 import (
 	"bytes"
+	"reflect"
 	"testing"
 )
 
@@ -51,18 +52,22 @@ func Test15(t *testing.T) {
 	}
 }
 
-func Test17(t *testing.T) {
-	m := [][]int{{3, 4, 2}, {0, 1, 5}, {2, 8, 9}}
-	n := [][]int{{0, 4, 2}, {0, 0, 0}, {0, 8, 9}}
-
-	ZeroCrosses(m)
-	// too lazy to write deep equal
-	if m[0][0] != n[0][0] {
-		t.Fail()
+func Test16(t *testing.T) {
+	M := [][]int{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}}
+	N := [][]int{{7, 4, 1}, {8, 5, 2}, {9, 6, 3}}
+	Rotate90(M)
+	if !reflect.DeepEqual(M, N) {
+		t.Error("Matrices not deep equal")
 	}
+}
 
-	if m[1][2] != n[1][2] {
-		t.Fail()
+func Test17(t *testing.T) {
+	M := [][]int{{3, 4, 2}, {0, 1, 5}, {2, 8, 9}}
+	N := [][]int{{0, 4, 2}, {0, 0, 0}, {0, 8, 9}}
+
+	ZeroCrosses(M)
+	if !reflect.DeepEqual(M, N) {
+		t.Error("Matrices not deep equal")
 	}
 
 }

@@ -1,6 +1,9 @@
 package lib
 
-import "strconv"
+import (
+	"fmt"
+	"strconv"
+)
 
 // 1.1
 
@@ -137,9 +140,43 @@ func Compress(s string) string {
 
 // rotate an NxN matrix, where each pixel in the image is 4
 // bytes, by 90 degrees. Can I do it in place? Surely the
-// answer is Yes.
+// answer is Yes. Just using simple ints WLOG.
 
-// XXX Skipping for now, can't focus enough for it
+func Rotate90(M [][]int) {
+	if len(M) <= 1 {
+		return
+	}
+
+	plen := len(M) - 1 // partition length of 4 non-overlaps
+
+	ax, ay := 0, 0
+	bx, by := 0, plen
+	cx, cy := plen, plen
+	dx, dy := plen, 0
+
+	var buf [4]int
+
+	for i := 0; i < plen; i++ {
+		// save the values
+		buf[0] = M[ax][ay]
+		buf[1] = M[bx][by]
+		buf[2] = M[cx][cy]
+		buf[3] = M[dx][dy]
+
+		fmt.Println("buf is:", buf)
+
+		// then do the swaps
+		M[ax][ay] = buf[3]
+		M[bx][by] = buf[0]
+		M[cx][cy] = buf[1]
+		M[dx][dy] = buf[2]
+
+		ay++
+		bx++
+		cy--
+		dx--
+	}
+}
 
 // 1.7
 

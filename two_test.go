@@ -16,3 +16,21 @@ func Test21(t *testing.T) {
 	}
 
 }
+
+func Test22RB(t *testing.T) {
+	var rb ringBuf
+	rb.New(uint(3))
+	rb.Push(1)
+	rb.Push(2)
+	rb.Push(3)
+	rb.Push(4)
+	rb.Push(5)
+	rb.Pop()
+
+	if !reflect.DeepEqual(rb.data, []int{4, 5, 3}) {
+		t.Fail()
+	}
+	if rb.cur != 1 {
+		t.Fail()
+	}
+}

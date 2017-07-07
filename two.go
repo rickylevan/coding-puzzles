@@ -27,6 +27,26 @@ func (l *node) Print() {
 	fmt.Println(l.String())
 }
 
+type ringBuf struct {
+	cur  int // where to read or
+	data []int
+}
+
+func (rb *ringBuf) New(size uint) {
+	rb.cur = 0
+	rb.data = make([]int, size)
+}
+
+func (rb *ringBuf) Push(val int) {
+	rb.data[rb.cur] = val
+	rb.cur = (rb.cur + 1) % len(rb.data)
+}
+
+func (rb *ringBuf) Pop() int {
+	rb.cur = (rb.cur - 1) % len(rb.data)
+	return rb.data[rb.cur]
+}
+
 // 2.1
 
 // remove duplicates from a linked list.

@@ -132,3 +132,44 @@ func Compress(s string) string {
 
 	return string(out)
 }
+
+// 1.6
+
+// rotate an NxN matrix, where each pixel in the image is 4
+// bytes, by 90 degrees. Can I do it in place? Surely the
+// answer is Yes.
+
+// XXX Skipping for now, can't focus enough for it
+
+// 1.7
+
+// given an MxN matrix, zero out the entire row and column
+// of every entry with value 0
+
+// will act in place
+func ZeroCrosses(mat [][]int) {
+
+	blankRows := make(map[int]struct{})
+	blankCols := make(map[int]struct{})
+
+	for i, row := range mat {
+		for j, val := range row {
+			if val == 0 {
+				blankRows[i] = struct{}{}
+				blankCols[j] = struct{}{}
+			}
+		}
+	}
+
+	for row := range blankRows {
+		for j := range mat[row] {
+			mat[row][j] = 0
+		}
+	}
+
+	for col := range blankCols {
+		for row := range mat {
+			mat[row][col] = 0
+		}
+	}
+}

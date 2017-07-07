@@ -50,3 +50,19 @@ func Test15(t *testing.T) {
 		t.Error(Compress("aaabcc"))
 	}
 }
+
+func Test17(t *testing.T) {
+	m := [][]int{{3, 4, 2}, {0, 1, 5}, {2, 8, 9}}
+	n := [][]int{{0, 4, 2}, {0, 0, 0}, {0, 8, 9}}
+
+	ZeroCrosses(m)
+	// too lazy to write deep equal
+	if m[0][0] != n[0][0] {
+		t.Fail()
+	}
+
+	if m[1][2] != n[1][2] {
+		t.Fail()
+	}
+
+}

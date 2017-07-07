@@ -1,9 +1,6 @@
 package lib
 
-import (
-	"fmt"
-	"strconv"
-)
+import "strconv"
 
 // 1.1
 
@@ -162,8 +159,6 @@ func Rotate90(M [][]int) {
 		buf[1] = M[bx][by]
 		buf[2] = M[cx][cy]
 		buf[3] = M[dx][dy]
-
-		fmt.Println("buf is:", buf)
 
 		// then do the swaps
 		M[ax][ay] = buf[3]

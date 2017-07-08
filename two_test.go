@@ -51,3 +51,11 @@ func Test23(t *testing.T) {
 		t.Fail()
 	}
 }
+
+func Test24(t *testing.T) {
+	l := &node{20, &node{5, &node{19, &node{4, nil}}}}
+	s := &node{5, &node{4, &node{20, &node{19, nil}}}}
+	if !reflect.DeepEqual(Partition(l, 8), s) {
+		t.Fail()
+	}
+}

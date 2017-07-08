@@ -107,3 +107,49 @@ func KthFromLast(l *node, k uint) int {
 func Snip(mid *node) {
 	*mid = *mid.next
 }
+
+// 2.4
+
+// Partition a linked list around a value x, such that all nodes
+// less than x come before all nodes greater than or equal to x
+
+// the head might move, so we must return a new head
+func Partition(list *node, x int) *node {
+
+	// freeze head once we have first value <= x
+	freezeHead := false
+
+	head := list
+	cur := list
+	end := list
+
+	count := 0
+	for end.next != nil {
+		count++
+		end = end.next
+	}
+
+	var prev *node
+
+	for i := 0; i < count; i++ {
+		if cur.val < x {
+			freezeHead = true
+		} else {
+			// skip over old value now
+			if prev != nil {
+				prev.next = cur.next
+			}
+			// write a new object
+			end.next = &node{val: cur.val, next: nil}
+			end = end.next
+		}
+
+		prev = cur
+		cur = cur.next
+		if !freezeHead {
+			head = head.next
+		}
+	}
+
+	return head
+}

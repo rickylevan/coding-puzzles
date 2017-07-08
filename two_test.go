@@ -59,3 +59,10 @@ func Test24(t *testing.T) {
 		t.Fail()
 	}
 }
+
+func Test25(t *testing.T) {
+	l := &node{2, &node{5, &node{4, nil}}}
+	if LinkedSum(l) != 452 {
+		t.Fail()
+	}
+}

@@ -153,3 +153,19 @@ func Partition(list *node, x int) *node {
 
 	return head
 }
+
+// 2.5
+
+// Little endian linked list numbers
+func LinkedSum(list *node) int {
+	var LSH func(*node, int) int
+	LSH = func(list *node, mult int) int {
+		if list == nil {
+			return 0
+		} else {
+			return list.val*mult + LSH(list.next, mult*10)
+		}
+	}
+
+	return LSH(list, 1)
+}

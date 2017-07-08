@@ -169,3 +169,70 @@ func LinkedSum(list *node) int {
 
 	return LSH(list, 1)
 }
+
+// 2.6
+
+// Identify the first point at which a corrupt linked list loops
+func FindLoop(list *node) *node {
+	m := make(map[*node]struct{})
+	// assume that there MUST be a loop
+	for {
+		if _, ok := m[list]; ok {
+			return list
+		} else {
+			m[list] = struct{}{}
+			list = list.next
+		}
+	}
+}
+
+// 2.7
+
+// easy unsafe stack
+type lilStack struct {
+	data []int
+}
+
+func (stk *lilStack) push(val int) {
+	stk.data = append(stk.data, val)
+}
+
+func (stk *lilStack) pop() int {
+	out := stk.data[len(stk.data)-1]
+	stk.data = stk.data[:len(stk.data)-1]
+	return out
+}
+
+// Check if a linked list is a palindrome, in a non cheap way
+// So let's
+func IsPalin(list *node) bool {
+
+	count := 0
+	end := list
+	for end != nil {
+		end = end.next
+		count++
+	}
+
+	ls := lilStack{}
+	var i int
+	for i = 0; i < count/2; i++ {
+		ls.push(list.val)
+		list = list.next
+	}
+
+	// skip middle value if odd length
+	if count%2 != 0 {
+		i++
+		list = list.next
+	}
+
+	for i = i; i < count; i++ {
+		if list.val != ls.pop() {
+			return false
+		}
+		list = list.next
+	}
+
+	return true
+}

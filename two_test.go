@@ -1,6 +1,7 @@
 package lib
 
 import (
+	"fmt"
 	"reflect"
 	"testing"
 )
@@ -63,6 +64,35 @@ func Test24(t *testing.T) {
 func Test25(t *testing.T) {
 	l := &node{2, &node{5, &node{4, nil}}}
 	if LinkedSum(l) != 452 {
+		t.Fail()
+	}
+}
+
+func Test26(t *testing.T) {
+	var a, b, c, d node
+	a = node{'A', &b}
+	b = node{'B', &c}
+	c = node{'C', &d}
+	d = node{'D', &b}
+
+	if FindLoop(&a) != &b {
+		t.Fail()
+	}
+}
+
+func Test27(t *testing.T) {
+	/*l := &node{20, &node{5, &node{19, &node{4, nil}}}}
+	if IsPalin(l) {
+		t.Fail()
+	}
+	l = &node{2, &node{5, &node{2, nil}}}
+	if !IsPalin(l) {
+		t.Fail()
+	}*/
+	l := &node{20, &node{5, &node{5, &node{20, nil}}}}
+	fmt.Println("ROUND 3")
+	if !IsPalin(l) {
+		t.Error("oops")
 		t.Fail()
 	}
 }

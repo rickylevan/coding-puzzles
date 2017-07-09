@@ -1,7 +1,6 @@
 package lib
 
 import (
-	"fmt"
 	"reflect"
 	"testing"
 )
@@ -81,16 +80,7 @@ func Test26(t *testing.T) {
 }
 
 func Test27(t *testing.T) {
-	/*l := &node{20, &node{5, &node{19, &node{4, nil}}}}
-	if IsPalin(l) {
-		t.Fail()
-	}
-	l = &node{2, &node{5, &node{2, nil}}}
-	if !IsPalin(l) {
-		t.Fail()
-	}*/
 	l := &node{20, &node{5, &node{5, &node{20, nil}}}}
-	fmt.Println("ROUND 3")
 	if !IsPalin(l) {
 		t.Error("oops")
 		t.Fail()

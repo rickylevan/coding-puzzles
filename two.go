@@ -203,8 +203,10 @@ func (stk *lilStack) pop() int {
 	return out
 }
 
+// 2.8
+
 // Check if a linked list is a palindrome, in a non cheap way
-// So let's
+// So let's push to the stack halfway, then pop backwards
 func IsPalin(list *node) bool {
 
 	count := 0

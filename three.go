@@ -30,3 +30,76 @@ func (ts *triStack) pop(stack int) int {
 	ts.stackIdxs[stack]--
 	return val
 }
+
+// 3.2
+
+// Stack with O(1) min() operation too
+
+// first let's make a stack
+type stack struct {
+	data []int
+	next int
+}
+
+func NewStack() *stack {
+	var s stack
+	s.data = make([]int, 0)
+	return &s
+}
+
+func (s *stack) push(val int) {
+	s.data = append(s.data, val)
+	s.next++
+}
+
+func (s *stack) pop() *int {
+	if len(s.data) == 0 {
+		return nil
+	} else {
+		out := s.data[s.next-1]
+		s.next--
+		return &out
+	}
+}
+
+func (s *stack) peek() *int {
+	if len(s.data) == 0 {
+		return nil
+	} else {
+		return &s.data[s.next-1]
+	}
+}
+
+// then use two stacks for data and min values
+type minStack struct {
+	data *stack
+	mins *stack
+}
+
+func NewMinStack() *minStack {
+	var ms minStack
+	ms.data = NewStack()
+	ms.mins = NewStack()
+	return &ms
+}
+
+func (ms *minStack) push(val int) {
+	ms.data.push(val)
+	if ms.mins.peek() == nil {
+		ms.mins.push(val)
+	} else if val <= *ms.mins.peek() {
+		ms.mins.push(val)
+	}
+}
+
+func (ms *minStack) pop() *int {
+	val := ms.data.pop()
+	if min := ms.mins.peek(); min != nil && *min == *val {
+		ms.mins.pop()
+	}
+	return val
+}
+
+func (ms *minStack) min() *int {
+	return ms.mins.peek()
+}
